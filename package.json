@@ -1,0 +1,23 @@
+{
+  "name": "rest-shop",
+  "version": "1.0.0",
+  "description": "A Node.js restful API Tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "davirolim",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0"
+  }
+}
