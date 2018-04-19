@@ -1,4 +1,6 @@
 const express = require('express')
+const user = require('./api/routes/user')
+
 const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
@@ -10,8 +12,9 @@ const ordersRoutes = require('./api/routes/orders')
 mongoose.connect(`mongodb://node-shop:${process.env.MONGO_ATLAS_PW}@node-rest-shop-shard-00-00-730sn.mongodb.net:27017,node-rest-shop-shard-00-01-730sn.mongodb.net:27017,node-rest-shop-shard-00-02-730sn.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin`)
 
 app.use(morgan('dev'))
-app.use(express.urlencoded({extended: false}))
-app.use(express.json())
+app.use('/uploads', express.static('uploads'));
+app.use(express.urlencoded({ extended: false, limit: '50mb' }));
+app.use(express.json());
 
 // Handling CORS
 app.use((req, res, next) => {
@@ -37,9 +40,8 @@ app.use((req,res,next) => {
 app.use((error,req,res,next) => {
   res.status(error.status || 500)
   res.json({
-    error: {
-      message: 'What are you trying to do?'
-    }
+    message: 'What are you trying to do?',
+    err: error.message
   })
 })
 
